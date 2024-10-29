@@ -1,3 +1,4 @@
+
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.3.4'
@@ -33,14 +34,31 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-
-	implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.6.11'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.11'
 	implementation 'org.liquibase:liquibase-core'
 
-	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
-	compileOnly 'org.mapstruct:mapstruct:1.5.3.Final'
-	annotationProcessor 'org.projectlombok:lombok:1.18.22'
-	compileOnly 'org.projectlombok:lombok:1.18.22'
+	// Обновленные версии MapStruct и Lombok
+
+	annotationProcessor 'org.projectlombok:lombok:1.18.26'
+	compileOnly 'org.projectlombok:lombok:1.18.26'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+	compileOnly 'org.mapstruct:mapstruct:1.5.5.Final'
 }
 
+tasks.withType(JavaCompile) {
+	// Указываем путь для сгенерированных файлов MapStruct
+	options.annotationProcessorGeneratedSourcesDirectory = file("$buildDir/generated/sources/annotationProcessor/java/main")
 
+	// Отключаем инкрементальную компиляцию
+	options.incremental = false
+}
+
+sourceSets {
+	// Добавляем сгенерированные файлы в исходный код
+	main.java.srcDir "$buildDir/generated/sources/annotationProcessor/java/main"
+}
+
+bootJar {
+	// Отключаем упаковку файлов сгенерированных MapStruct в jar-файл
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
