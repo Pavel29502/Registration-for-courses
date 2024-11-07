@@ -1,53 +1,87 @@
 package ru.english.registration_for_courses.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Type;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.logging.Level;
 
-@Entity
-@Table(name = "club")
-@Data
+@Getter
+@Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class Club {
-    @Id
-    private UUID id;
+@Entity
+@Table(name = "club")
+    public class Club {
+        @Id
+        @GeneratedValue(strategy = GenerationType.UUID)
+        private UUID id;
 
-    @Column(name = "club_name", nullable = false)
-    private String clubName;
+        @Column(name = "club_name", nullable = false)
+        @NonNull
+        private String clubName;
 
-    @Column(name = "type", nullable = false)
-    private String type;
+        @Column(name = "type", nullable = false)
+        @NonNull
+        private String type;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "level", nullable = false)
-    private Level level;
+        @Enumerated(EnumType.STRING)
+        @Column(name = "level", nullable = false)
+        @NonNull
+        private Level level;
 
-    @Type(type = "jsonb")
-    @Column(columnDefinition = "jsonb")
-    private Map<String, Object> label;
+@ManyToMany(fetch = FetchType.EAGER)
+@JoinTable(
+        name = "club_tag",
+        joinColumns = @JoinColumn(name = "club_id"),
+        inverseJoinColumns = @JoinColumn(name = "tag_id")
+)
+        private List<Tag> labels;  // Список тегов
 
-    @Column(name = "description", columnDefinition = "TEXT")
-    private String description;
+        @Column(name = "description", columnDefinition = "TEXT")
+        private String description;
 
-    @Column(name = "length", nullable = false)
-    private String length;
+        @Column(name = "content", columnDefinition = "TEXT")
+        private String content;
 
-    @Column(name = "frequency", nullable = false)
-    private String frequency;
+        @Column(name = "length", nullable = false)
+        private String length;
+
+        @Column(name = "frequency", nullable = false)
+        private String frequency;
 
 
-    // Enum для уровня клуба
+
+
+//        public enum Level {
+//            BEGINER, INTERMEDIATE, ADVANCED
+//        }
+
     public enum Level {
-        BEGINNER, INTERMEDIATE, ADVANCED
+        A1_A2("A1-A2"),
+        B1_B2("B1-B2");
+
+
+        private final String displayValue;
+
+        Level(String displayValue) {
+            this.displayValue = displayValue;
+        }
+
+        public String getDisplayValue() {
+            return displayValue;
+        }
     }
-}
+    }
+
+
+
+
+
+
 
 
 

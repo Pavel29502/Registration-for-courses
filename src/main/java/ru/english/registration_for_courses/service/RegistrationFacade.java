@@ -16,13 +16,18 @@ import java.util.UUID;
 @Slf4j
 public class RegistrationFacade {
 
-    private static final Logger log = LoggerFactory.getLogger(RegistrationFacade.class);
+//    private static final Logger log = LoggerFactory.getLogger(RegistrationFacade.class);
     private final BaseCrudService<Registration> baseCrudService;
 
     private final RegistrationMapper mapper;
 
     public RegistrationDTO createRegistration(RegistrationDTO registrationDTO) {
         log.info("ЧТО ТУТ: {}", mapper.asRegistration(registrationDTO));
+
+//        Registration registration = mapper.asRegistration(registrationDTO);
+//        Registration save = baseCrudService.save(registration);
+//        RegistrationDTO registrationDTO1 = mapper.asRegistrationDTO(save);
+//        return registrationDTO1;
         return mapper.asRegistrationDTO(baseCrudService.save(mapper.asRegistration(registrationDTO)));
     }
 

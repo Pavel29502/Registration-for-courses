@@ -7,24 +7,30 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ru.english.registration_for_courses.dto.ClubDTO;
 import ru.english.registration_for_courses.entity.Club;
+import ru.english.registration_for_courses.mapper.ClubMap;
 import ru.english.registration_for_courses.mapper.ClubMapper;
+import ru.english.registration_for_courses.service.implementation.TagService;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
 
-@Service
 @RequiredArgsConstructor
+@Service
 @Slf4j
 public class ClubFacade {
 
-    private static final Logger log = LoggerFactory.getLogger(ClubFacade.class);
     private final BaseCrudService<Club> baseCrudService;
     private final ClubMapper mapper;
+    private final TagService tagService;
 
     public ClubDTO createClub(ClubDTO clubDTO) {
-        log.info("Creating club: {}", mapper.asClubDTO(clubDTO));
-        return mapper.asClubsDTO(baseCrudService.save(mapper.asClubs(clubDTO)));
+//        log.info("Сохраняем клуб: {}", clubDTO);
+        ClubMap.mapClubDtoToClub(clubDTO);
+        Club club = new Club();
+        club.
+
+        return mapper.asClubDTO(baseCrudService.save(mapper.asClub(clubDTO, tagService)));
     }
 
     public List<ClubDTO> findAll() {
@@ -32,8 +38,7 @@ public class ClubFacade {
     }
 
     public ClubDTO findById(UUID id) {
-        return mapper.asClubDTO(baseCrudService.findById(id))
-                .orElseThrow(() -> new EntityNotFoundException("Club not found"));
+        return mapper.asClubDTO(baseCrudService.findById(id));
     }
 }
 
