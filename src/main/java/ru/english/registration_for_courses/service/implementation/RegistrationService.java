@@ -12,7 +12,6 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class RegistrationService implements BaseCrudService<Registration> {
-
     private final RegistrationRepository registrationRepository;
 
     @Override

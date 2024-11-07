@@ -11,12 +11,26 @@ spring:
       dialect: org.hibernate.dialect.PostgreSQLDialect
   liquibase:
     enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/registration}
     username: ${SPRING_DATASOURCE_USERNAME:postgres}
     password: ${SPRING_DATASOURCE_PASSWORD:root}
-#      -
-#      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/registration
-#      - SPRING_DATASOURCE_USERNAME=postgres
-#      - SPRING_DATASOURCE_PASSWORD=root
+
+
+server:
+  port: 8080
+
+
+
+
+
+  #      -
+  #      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/registration
+  #      - SPRING_DATASOURCE_USERNAME=postgres
+  #      - SPRING_DATASOURCE_PASSWORD=root
+
+
+
 

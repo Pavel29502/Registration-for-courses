@@ -10,13 +10,14 @@ import ru.english.registration_for_courses.service.RegistrationFacade;
 import java.util.List;
 import java.util.UUID;
 
+@CrossOrigin
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/registration")
 @Slf4j
 public class RegistrationController {
 
-    private static final Logger log = LoggerFactory.getLogger(RegistrationController.class);
+//    private static final Logger log = LoggerFactory.getLogger(RegistrationController.class);
     private final RegistrationFacade registrationFacade;
 
     @PostMapping("/save")
