@@ -14,6 +14,7 @@ import ru.english.registration_for_courses.service.implementation.TagService;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -28,9 +29,20 @@ public class ClubFacade {
 //        log.info("Сохраняем клуб: {}", clubDTO);
         ClubMap.mapClubDtoToClub(clubDTO);
         Club club = new Club();
-        club.
+//        club.
 
         return mapper.asClubDTO(baseCrudService.save(mapper.asClub(clubDTO, tagService)));
+    }
+
+    public List<ClubDTO> createClubs(List<ClubDTO> clubDTOs) {
+        List<Club> clubs = clubDTOs.stream()
+                .map(dto -> mapper.asClub(dto, tagService)) // Преобразование DTO в сущности
+                .collect(Collectors.toList());
+
+        List<Club> savedClubs = baseCrudService.saveAll(clubs); // Сохранение списка клубов
+        return savedClubs.stream()
+                .map(mapper::asClubDTO) // Преобразование обратно в DTO
+                .collect(Collectors.toList());
     }
 
     public List<ClubDTO> findAll() {

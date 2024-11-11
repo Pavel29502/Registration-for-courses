@@ -26,23 +26,30 @@ public class TagController {
         return ResponseEntity.ok(savedTag);
     }
 
-    // Эндпоинт для получения всех тегов
-//    @GetMapping("/all")
-//    public ResponseEntity<List<Tag>> getAllTags() {
-//        List<Tag> tags = tagService.findAll();
-//        return ResponseEntity.ok(tags);
-//    }
+    //Метод который сохраняет список тэгов
+    @PostMapping("/create-batch")
+    public ResponseEntity<List<Tag>> createTags(@RequestBody List<TagDTO> tagDTOs) {
+        List<Tag> savedTags = tagService.createTags(tagDTOs);
+        return ResponseEntity.ok(savedTags);
+    }
+
 
     @GetMapping
     public ResponseEntity<List<TagDTO>> getAllTags() {
         List<TagDTO> tags = tagService.findAll();
         return ResponseEntity.ok(tags); // Возвращаем список DTO
 
+    }
+}
         // Эндпоинт для получения тега по ID
 //        @GetMapping("/{id}")
 //        public ResponseEntity<Tag> getTagById (@PathVariable UUID id){
 //            Tag tag = tagService.findById(id);
 //            return ResponseEntity.ok(tag);
 //        }
-    }
-}
+        // Эндпоинт для получения всех тегов
+//    @GetMapping("/all")
+//    public ResponseEntity<List<Tag>> getAllTags() {
+//        List<Tag> tags = tagService.findAll();
+//        return ResponseEntity.ok(tags);
+//    }

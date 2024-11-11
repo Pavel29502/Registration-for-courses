@@ -1,26 +1,26 @@
 spring:
-  application:
-    name: registration-for-courses
-  jpa:
-    open-in-view: false
-    hibernate:
-      ddl-auto: validate
-    show-sql: true
-    properties:
-      hibernate:
-      dialect: org.hibernate.dialect.PostgreSQLDialect
-  liquibase:
-    enabled: true
-    change-log: classpath:db/changelog/db.changelog-master.yaml
+          application:
+            name: registration-for-courses
+          jpa:
+            open-in-view: false
+            hibernate:
+              ddl-auto: validate
+            show-sql: true
+            properties:
+              hibernate:
+              dialect: org.hibernate.dialect.PostgreSQLDialect
+          liquibase:
+            enabled: true
+            change-log: classpath:db/changelog/db.changelog-master.yaml
 
-  datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/registration}
-    username: ${SPRING_DATASOURCE_USERNAME:postgres}
-    password: ${SPRING_DATASOURCE_PASSWORD:root}
+          datasource:
+            url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/registration}
+            username: ${SPRING_DATASOURCE_USERNAME:postgres}
+            password: ${SPRING_DATASOURCE_PASSWORD:root}
 
 
-server:
-  port: 8080
+          server:
+            port: 8020
 
 
 

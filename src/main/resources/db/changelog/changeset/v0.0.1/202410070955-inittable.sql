@@ -25,3 +25,15 @@ CREATE TABLE IF NOT EXISTS club_tag
     tag_id UUID REFERENCES tag(id),
     PRIMARY KEY (club_id, tag_id)
 );
+
+CREATE TABLE IF NOT EXISTS shedule
+(
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(), -- Для PostgreSQL используйте gen_random_uuid() или uuid_generate_v4()
+    club_id UUID NOT NULL REFERENCES club(id),
+    day_of_week  VARCHAR(20) NOT NULL,
+    start_time   TIME        NOT NULL,
+    end_time     TIME        NOT NULL,
+    session_type VARCHAR(50) NOT NULL,
+    session_date DATE,
+    UNIQUE (club_id, day_of_week, start_time)
+);

@@ -28,6 +28,11 @@ public class RegistrationService implements BaseCrudService<Registration> {
     public Registration findById(UUID id) {
         return registrationRepository.getReferenceById(id);
     }
+
+    @Override
+    public List<Registration> saveAll(List<Registration> entities) {
+        return null;
+    }
 }
 
 

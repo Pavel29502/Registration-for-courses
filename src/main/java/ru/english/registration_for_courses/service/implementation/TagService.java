@@ -35,4 +35,15 @@ public class TagService {
         tag.setName(tagDTO.getName()); // Используем только поле name, id будет сгенерирован
         return tagRepository.save(tag);
     }
+
+    public List<Tag> createTags(List<TagDTO> tagDTOs) {
+        List<Tag> tags = tagDTOs.stream()
+                .map(tagDTO -> {
+                    Tag tag = new Tag();
+                    tag.setName(tagDTO.getName()); // Поле `id` игнорируется, генерируется автоматически
+                    return tag;
+                })
+                .collect(Collectors.toList());
+        return tagRepository.saveAll(tags);
+    }
 }

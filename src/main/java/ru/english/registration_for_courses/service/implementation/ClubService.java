@@ -37,6 +37,11 @@ public class ClubService implements BaseCrudService<Club> {
             return clubRepository.findById(id)
                     .orElseThrow(() -> new EntityNotFoundException("Club not found"));
         }
+
+    @Override
+    public List<Club> saveAll(List<Club> clubs) {
+        return clubRepository.saveAll(clubs); // Используем JpaRepository для массового сохранения
+    }
     }
 
 

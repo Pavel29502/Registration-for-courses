@@ -30,6 +30,12 @@ public class ClubController {
         return clubFacade.createClub(clubDTO);
     }
 
+    @PostMapping("/save-batch")
+    public ResponseEntity<List<ClubDTO>> createClubs(@RequestBody List<ClubDTO> clubDTOs) {
+        List<ClubDTO> savedClubs = clubFacade.createClubs(clubDTOs);
+        return ResponseEntity.ok(savedClubs);
+    }
+
     @GetMapping
     public List<ClubDTO> getAllClubs() {
         return clubFacade.findAll();

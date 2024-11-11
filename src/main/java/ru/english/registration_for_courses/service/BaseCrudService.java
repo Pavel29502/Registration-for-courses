@@ -9,6 +9,8 @@ public interface BaseCrudService<T> {
         List<T> findAll();
 
         T findById(UUID id);
+
+        List<T> saveAll(List<T> entities);
 //    public T update(T entity);
 //    public void delete(UUID id);
 }
